@@ -5,7 +5,7 @@
     </a>
     <div :class="$style.login">
       <span :class="$style.text">Login</span>
-      <span class="icon-shopping-cart icon"></span>
+      <span class="icon-shopping-cart" :class="$style.icon"></span>
     </div>
   </div>
 </template>
@@ -37,13 +37,13 @@ export default {
       }
     }
   }
-</style>
-<style lang="scss">
-@import "../../base/scss/icon.css";
-.icon {
+  .icon {
   display:inline-block;
   vertical-align: middle;
 }
+</style>
+<style lang="scss">
+@import "../../base/scss/icon.css";
 .icon-shopping-cart{
   font-size:20px;
 }

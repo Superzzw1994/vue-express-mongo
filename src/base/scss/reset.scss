@@ -48,3 +48,13 @@ hr {
     background-color: #000;
     height: 1px
 }
+.clearfix:after{
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+.clearfix{
+  zoom:1;
+}
