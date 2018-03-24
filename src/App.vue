@@ -2,7 +2,7 @@
   <div id="app">
     <v_header></v_header>
     <v_nav></v_nav>
-    <router-view/>
+    <router-view :goods="goods"/>
     <v_footer></v_footer>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   mounted () {
     this.axios.get('/goods').then((res) => {
-      this.goods = res
+      this.goods = res.data.result.list[0].result
     })
   }
 }

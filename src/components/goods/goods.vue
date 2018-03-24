@@ -20,34 +20,10 @@
       </div>
       <div :class="$style.goodlist">
       <ul>
-        <li>
-          <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" alt="" width="235" height="235">
-          <p :class="$style.product">自拍杆</p>
-          <p :class="$style.price">￥39.00</p>
-          <div :class="$style.addCart">加入购物车</div>
-        </li>
-         <li>
-          <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" alt="" width="235" height="235">
-          <p :class="$style.product">自拍杆</p>
-          <p :class="$style.price">￥39.00</p>
-          <div :class="$style.addCart">加入购物车</div>
-        </li>
-         <li>
-          <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" alt="" width="235" height="235">
-          <p :class="$style.product">自拍杆</p>
-          <p :class="$style.price">￥39.00</p>
-          <div :class="$style.addCart">加入购物车</div>
-        </li>
-         <li>
-          <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" alt="" width="235" height="235">
-          <p :class="$style.product">自拍杆</p>
-          <p :class="$style.price">￥39.00</p>
-          <div :class="$style.addCart">加入购物车</div>
-        </li>
-         <li>
-          <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" alt="" width="235" height="235">
-          <p :class="$style.product">自拍杆</p>
-          <p :class="$style.price">￥39.00</p>
+        <li v-for="good in goods" :key="good.productId">
+          <img :src="good.prodcutImg" alt="" width="235" height="235">
+          <p :class="$style.product">{{good.productName}}</p>
+          <p :class="$style.price">￥{{good.prodcutPrice}}</p>
           <div :class="$style.addCart">加入购物车</div>
         </li>
       </ul>
@@ -57,7 +33,14 @@
 </template>
 <script>
 export default {
-
+  props: {
+    goods: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  }
 }
 </script>
 <style lang="scss" module>
