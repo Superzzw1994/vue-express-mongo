@@ -4,7 +4,7 @@
       <div :class="$style.box">
         <span :class="$style.default">Sort by:</span>
         <span :class="$style.target">Default</span>
-        <span :class="$style.default">Price<span class="icon-arrow-up2" :class="$style.icon"></span></span>
+        <span :class="$style.default" @click="sortGood">Price<span class="icon-arrow-up2" :class="$style.icon"></span></span>
       </div>
     </div>
     <div :class="$style.content" class="clearfix">
@@ -21,9 +21,9 @@
       <div :class="$style.goodlist">
       <ul>
         <li v-for="good in goods" :key="good.productId">
-          <img :src="good.prodcutImg" alt="" width="235" height="235">
+          <img src="https://i8.mifile.cn/a1/pms_1510033696.15216628!560x560.jpg" alt="" width="235" height="235">
           <p :class="$style.product">{{good.productName}}</p>
-          <p :class="$style.price">￥{{good.prodcutPrice}}</p>
+          <p :class="$style.price">￥{{good.salePrice}}</p>
           <div :class="$style.addCart">加入购物车</div>
         </li>
       </ul>
@@ -33,12 +33,40 @@
 </template>
 <script>
 export default {
-  props: {
-    goods: {
-      type: Array,
-      default () {
-        return []
+  data () {
+    return {
+      goods: [],
+      sortFlag: true,
+      page: 1,
+      pageSize: 8
+    }
+  },
+  mounted () {
+    this.getList()
+  },
+  methods: {
+    getList () {
+      if (this.sortFlag) {
+        this.sort = 1
+      } else {
+        this.sort = -1
       }
+      var param = {
+        page: this.page,
+        sort: this.sort,
+        pageSize: this.pageSize
+      }
+      this.axios.get('/goods', {
+        params: param
+      }).then((res) => {
+        console.log(res)
+        this.goods = res.data.result.list
+      })
+    },
+    sortGood () {
+      this.sortFlag = !this.sortFlag
+      this.page = 1
+      this.getList()
     }
   }
 }

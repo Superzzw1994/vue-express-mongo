@@ -2,7 +2,7 @@
   <div id="app">
     <v_header></v_header>
     <v_nav></v_nav>
-    <router-view :goods="goods"/>
+    <router-view/>
     <v_footer></v_footer>
   </div>
 </template>
@@ -13,20 +13,10 @@ import nav from './components/nav/nav'
 import footer from './components/footer/footer'
 export default {
   name: 'App',
-  data () {
-    return {
-      goods: []
-    }
-  },
   components: {
     v_header: header,
     v_nav: nav,
     v_footer: footer
-  },
-  mounted () {
-    this.axios.get('/goods').then((res) => {
-      this.goods = res.data.result.list[0].result
-    })
   }
 }
 </script>
