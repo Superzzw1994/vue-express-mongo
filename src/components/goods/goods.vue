@@ -47,7 +47,7 @@ export default {
       initparams: {
         page: 1,
         pageSize: 8,
-        fullCount: null
+        fullCount: 17
       }
     }
   },
@@ -81,6 +81,7 @@ export default {
         params: param
       }).then((res) => {
         this.goods = res.data.result.list
+        console.log(res)
         this.initparams.fullCount = this.goods[0].totalCount
       })
     },
@@ -90,6 +91,7 @@ export default {
     },
     pagezzw (res) {
       this.page = res
+      console.log(res)
     }
   }
 }
