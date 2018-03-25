@@ -28,21 +28,42 @@
         </li>
       </ul>
       </div>
+      <paging v-on:pageindex="pagezzw" :params="initparams"></paging>
     </div>
   </div>
 </template>
 <script>
+import paging from '../Paging/paging'
 export default {
+  components: {
+    paging: paging
+  },
   data () {
     return {
       goods: [],
       sortFlag: true,
       page: 1,
-      pageSize: 8
+      pageSize: 8,
+      initparams: {
+        page: 1,
+        pageSize: 8,
+        fullCount: null
+      }
     }
   },
   mounted () {
+
+  },
+  created () {
     this.getList()
+  },
+  watch: {
+    page (val) {
+      this.getList()
+    },
+    sortFlag (val) {
+      this.getList()
+    }
   },
   methods: {
     getList () {
@@ -59,14 +80,16 @@ export default {
       this.axios.get('/goods', {
         params: param
       }).then((res) => {
-        console.log(res)
         this.goods = res.data.result.list
+        this.initparams.fullCount = this.goods[0].totalCount
       })
     },
     sortGood () {
       this.sortFlag = !this.sortFlag
       this.page = 1
-      this.getList()
+    },
+    pagezzw (res) {
+      this.page = res
     }
   }
 }
@@ -105,6 +128,8 @@ export default {
   width:100%;
   box-sizing: border-box;
   display: flex;
+  position: relative;
+  min-height: 868.5px;
 }
 .price{
   flex:200px 0 0;
